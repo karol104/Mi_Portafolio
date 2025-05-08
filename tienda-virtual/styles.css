@@ -5,7 +5,9 @@ body {
   background-color: #ffffff;
   color: #333;
 }
-
+.contenedorPrincipal{
+  width: 100%;
+}
 .contenedor_principal {
   width: 90%;
   margin: 0 auto;
@@ -19,7 +21,7 @@ body {
   color: #fff;
   display: flex;
   justify-content: space-between;
-  padding: 10px 5%;
+  padding: 6px 10%;
   box-sizing: border-box;
   flex-wrap: wrap;
 }
@@ -237,20 +239,14 @@ body {
 .medidas p {
   border: 1px solid #dadada;
   border-radius: 50%;
-  /* Esto hará el círculo perfecto */
   width: 50px;
-  /* Ancho fijo */
   height: 50px;
-  /* Alto fijo (igual que el ancho) */
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0;
-  /* Elimina márgenes por defecto */
   aspect-ratio: 1/1;
-  /* Garantiza relación 1:1 */
   padding: 0;
-  /* Elimina padding interno */
 }
 
 .botonparte1 {
@@ -396,11 +392,10 @@ body {
 .seccion {
   position: relative;
   z-index: 2;
-  padding: 40px 5%;
+  padding: 90px;
   padding-bottom: 0px;
   width: 100%;
   max-width: 600px;
-  margin-top: 80px;
 }
 
 .casa {
@@ -675,20 +670,6 @@ strong {
   .contenedor_principal {
     width: 90%;
   }
-
-  .barra1 {
-    height: 70px;
-  }
-
-  .barra1 {
-    height: 70px;
-  }
-
-  .barra1,
-  .barra2 {
-    padding: 10px 95px;
-  }
-
   .div3 {
     gap: 20px;
   }
@@ -1057,6 +1038,9 @@ strong {
   .seccion1 p {
     font-size: 30px;
   }
+  .contenedor3{
+    min-height: 250px;
+  }
 
   .correo {
     max-width: 350px;
@@ -1105,8 +1089,7 @@ strong {
 
   .seccion {
     padding: 60px;
-    padding-bottom: 0px;
-    margin-top: 10px;
+    padding-bottom: 20px;
   }
 
   .informacionseccion {
@@ -1295,6 +1278,7 @@ strong {
 
   .seccion1 h3 {
     font-size: 16px;
+   margin-top: 18px;
   }
 
   .seccion1 p {
@@ -1304,6 +1288,9 @@ strong {
   .correo {
     max-width: 350px;
     height: 40px;
+  }
+  .contenedor3{
+    min-height: 350px;
   }
 
   .boton3 {
@@ -1348,9 +1335,9 @@ strong {
 
   .seccion {
     padding: 60px;
-    padding-bottom: 0px;
-    margin-top: 10px;
+    padding-bottom: 20px;
   }
+
 
   .informacionseccion {
     display: grid;
