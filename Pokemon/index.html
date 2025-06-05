@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokecard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div class="contenedorPrincipal">
+        <div class="barra">
+            <img class="pk" src="./IMG/pk1.gif" alt="Pokemon animado">
+            <img class="pk" src="./IMG/pk2.gif" alt="Pokemon animado">
+            <img class="pk" src="./IMG/pk3.gif" alt="Pokemon animado">
+            <img class="pk" src="./IMG/pk4.gif" alt="Pokemon animado">
+            <img class="pk" src="./IMG/pk5.gif" alt="Pokemon animado">
+        </div>
+        <!-- <img id="titulo1" src="./IMG/titulo.png"> -->
+        <p id="titulo1">¿QUIÉN ES ESE POKÉMON?</P>
+        <div class="imagenpokemon">
+            <div class="card" id="Card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <h2 id="id"></h2>
+                        <img src="./IMG/pokecard.jpg" alt="Pokémon Card Back" />
+                    </div>
+                    <div class="card-back">
+
+                        <div class="caracteristicastext">
+                            <div class="tarjeta1">
+                                <h1 id="titulo"></h1>
+                                <img src="" id="pok" alt="Pokémon Sprite">
+                                <div class="caracteristicas">
+                                    <p>Peso: <span id="peso"></span> kg</p>
+                                    <p>Altura: <span id="altura"></span> m</p>
+                                </div>
+                            </div>
+                            <div class="tarjeta2">
+                                <h3>Tipos del Pokémon</h3>
+                                <div class="debilidades-container" id="tipos"></div>
+                                <h3>Debilidades del Pokémon</h3>
+                                <div class="debilidades-container" id="debilidades"></div>
+                            </div>
+                            <br>
+                            <hr class="linea">
+                            <div class="tarjeta3">
+                                <!-- <h3>Estadísticas</h3> -->
+                                <div id="stats-container"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            let randomPokemon = Math.floor(Math.random() * 400) + 1;
+            let res = await axios.get("https://pokeapi.co/api/v2/pokemon/" + randomPokemon);
+            console.log(res);
+
+            document.getElementById("titulo").textContent = res.data.name;
+            document.getElementById("pok").src = res.data.sprites.other.dream_world.front_default;
+            document.getElementById("peso").textContent = res.data.weight / 10;
+            document.getElementById("altura").textContent = res.data.height / 10;
+            document.getElementById("id").textContent = "#" + res.data.id;
+
+            const coloresPorTipo = {
+                normal: '#A8A77A', fire: '#EE8130', water: '#6390F0',
+                electric: '#F7D02C', grass: '#7AC74C', ice: '#78B5B3',
+                fighting: '#C22E28', poison: '#A33EA1', ground: '#E2BF65',
+                flying: '#A98FF3', psychic: '#F95587', bug: '#A6B91A',
+                rock: '#B6A136', ghost: '#735797', dragon: '#6F35FC',
+                dark: '#705746', steel: '#5F5F75', fairy: '#D685AD'
+            };
+
+            res.data.types.forEach(async (item) => {
+                const tipo = item.type.name;
+                document.getElementById("tipos").innerHTML += `
+                    <button class="boton-tipo" style="background-color: ${coloresPorTipo[tipo]};">${tipo}</button>
+                `;
+
+                let tipoRes = await axios.get(item.type.url);
+                let debilidades = tipoRes.data.damage_relations.double_damage_from;
+                debilidades.forEach(d => {
+                    document.getElementById("debilidades").innerHTML += `
+                        <button class="boton-debilidad" style="background-color: ${coloresPorTipo[d.name] || '#ccc'};">
+                            ${d.name}
+                        </button>
+                    `;
+                });
+            });
+
+            const tipos = res.data.types.map(item => item.type.name);
+            const card = document.querySelector(".tarjeta1");
+
+            if (tipos.length === 2) {
+                card.style.background = `linear-gradient(150deg, ${coloresPorTipo[tipos[0]]}, ${coloresPorTipo[tipos[1]]})`;
+            } else {
+                card.style.backgroundColor = coloresPorTipo[tipos[0]];
+            }
+
+            const statsContainer = document.getElementById("stats-container");
+            res.data.stats.forEach(stat => {
+                const statName = stat.stat.name;
+                const baseStat = stat.base_stat;
+                const color = coloresPorTipo[tipos[0]] || '#888';
+
+                statsContainer.innerHTML += `
+                    <div class="stat">
+                        <span class="stat-name">${statName.toUpperCase()}:</span>
+                        <div class="stat-bar">
+                            <div class="stat-fill" style="width: ${baseStat > 150 ? 100 : baseStat * 100 / 150}%; background-color: ${color};"></div>
+                            <span class="stat-value">${baseStat}/255</span>
+                        </div>
+                    </div>`;
+            });
+        });
+
+        document.getElementById("Card").addEventListener("click", function (e) {
+            const card = document.getElementById("Card");
+            card.classList.toggle("flip");
+        });
+
+    </script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body>
+
+</html>

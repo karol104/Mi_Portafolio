@@ -1,0 +1,537 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: auto;
+    overflow-x: hidden;
+
+}
+
+body {
+    background-image: url('./IMG/cynthia-pokemon.gif');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: rgba(255, 255, 255, 0.507);
+    background-blend-mode: lighten;
+    margin: 0;
+    padding: 0;
+}
+.card {
+    width: 400px;
+    height: 600px;
+    perspective: 1000px;
+    cursor: pointer;
+    display: flex;
+}
+
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+}
+
+.card.flip .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+
+}
+
+#id {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 35px;
+    font-family: 'Press Start 2P', sans-serif;
+    color: transparent;
+    background-image: linear-gradient(45deg, #ff0000, #3333ff);
+    background-clip: text;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+    padding: 12px 24px;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(151, 39, 255, 0.5);
+}
+
+
+#id:hover {
+    box-shadow: 0 0 20px #ff0000,
+        0 0 30px #3333ff,
+        0 0 40px rgba(151, 39, 255, 0.6);
+}
+
+.card-back {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-image: url('./IMG/fondocard.jpg');
+    background-position: center;
+    background-color: rgba(255, 255, 255, 0.733);
+    background-size: cover;
+    background-blend-mode: lighten;
+    transform: rotateY(180deg);
+    padding: 10px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+#titulo1 {
+    margin-top: 30px;
+    color: rgb(22, 1, 143);
+    font-family: 'Press Start 2P', sans-serif;
+    text-shadow: 2px 2px 4px rgba(223, 26, 85, 0.5);
+    font-size: 20px;
+}
+
+.contenedorPrincipal {
+    padding: 0;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.barra {
+    width: 100%;
+    position: relative;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    border: 3px solid rgb(204, 0, 255);
+    border-radius: 10px;
+    padding: 5px;
+    box-shadow:
+        0 0 20px rgba(255, 0, 212, 0.267),
+        0 8px 20px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    flex-wrap: wrap;
+}
+
+.pk {
+    width: 50px;
+    height: 50px;
+}
+
+h1 {
+    margin: 0px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: rgb(255, 255, 255);
+    font-family: 'Press Start 2P', sans-serif;
+    text-shadow: 2px 2px 4px rgba(223, 26, 223, 0.5);
+}
+
+.caracteristicas {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 11px;
+    color: rgb(255, 255, 255);
+    font-family: 'Press Start 2P', sans-serif;
+    text-shadow: 2px 2px 4px rgba(223, 26, 223, 0.5);
+}
+
+
+h3,
+h2 {
+    font-weight: 500;
+    font-size: 16px;
+    font-family: 'Press Start 2P', sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+img#pok {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 20px;
+    border-radius: 10%;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.imagenpokemon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+#pokemon {
+    width: 800px;
+    height: 300px;
+}
+
+.caracteristicastext {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.tarjeta1 {
+    height: auto;
+    border: 6px solid gold;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow:
+        0 0 20px rgba(255, 215, 0, 0.5),
+        0 8px 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    min-height: 300px;
+}
+
+.tarjeta2 {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.tarjeta2 h3 {
+    margin-top: 10px;
+    color: rgb(128, 0, 90);
+}
+
+.linea {
+    border: 1px solid rgb(175, 82, 82);
+    width: 100%;
+
+}
+
+.debilidades-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.info-con-id {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+.boton-tipo,
+.boton-debilidad {
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin: 2px;
+    border-radius: 5px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.boton-tipo:hover,
+.boton-debilidad:hover {
+    filter: brightness(1.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#stats-container {
+    padding: 10px;
+}
+
+.stat {
+    margin-bottom: 10px;
+}
+
+.stat-name {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: 13px;
+    color: rgb(128, 0, 90);
+
+}
+
+.stat-bar {
+    position: relative;
+    height: 20px;
+    background-color: black;
+    border-radius: 10px;
+    border: 2px solid rgb(255, 255, 255);
+    box-shadow: 0 10px 22px rgba(255, 255, 255, 0.5);
+    overflow: hidden;
+}
+
+.stat-fill {
+    height: 100%;
+    width: 0;
+    transition: width 0.5s ease;
+}
+
+.stat-value {
+    position: absolute;
+    right: 10px;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px #a330ad;
+}
+
+
+@media (max-width: 900px) {
+    .card {
+        width: 350px;
+        height: 525px;
+    }
+
+    .caracteristicas {
+        font-size: 9px;
+    }
+
+    #pok {
+        width: 150px;
+        height: 150px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    #titulo1 {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    .barra {
+        justify-content: center;
+        padding: 5px 0;
+    }
+
+    .pk {
+        width: 40px;
+        height: 40px;
+    }
+
+    .card {
+        width: 300px;
+        height: 450px;
+    }
+
+    .tarjeta1 {
+        padding-bottom: 0px;
+
+    }
+
+    #pok {
+        width: 120px;
+        height: 120px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    #titulo1 {
+        font-size: 16px;
+        margin-top: 50px;
+    }
+
+    .caracteristicas {
+        font-size: 7px;
+        gap: 10px;
+    }
+
+    .stat-name {
+        font-size: 10px;
+    }
+
+    .stat-bar {
+        height: 16px;
+    }
+
+    .boton-tipo,
+    .boton-debilidad {
+        font-size: 8px;
+        padding: 3px 6px;
+    }
+     body {
+        background-size: cover;
+        background-color: rgba(255, 255, 255, 0.507);
+    }
+}
+
+
+@media (max-width: 480px) {
+    .card {
+        width: 320px;
+        height: 480px;
+    }
+
+    #pok {
+        width: 100px;
+        height: 100px;
+    }
+
+    h1 {
+        font-size: 18px;
+    }
+
+    #titulo1 {
+        font-size: 17px;
+        margin-top: 50px;
+    }
+
+    .caracteristicas {
+        font-size: 8px;
+        gap: 10px;
+    }
+
+    .stat-name {
+        font-size: 9px;
+    }
+
+    .stat-bar {
+        height: 14px;
+    }
+
+    .tarjeta1 {
+        padding: 15px;
+        min-height: 250px;
+    }
+
+    #id {
+        font-size: 25px;
+        padding: 8px 16px;
+    }
+}
+
+
+@media (max-width: 402px) {
+    .card {
+        width: 300px;
+        height: 445px;
+    }
+
+    #pok {
+        width: 80px;
+        height: 80px;
+    }
+
+    
+    #titulo1 {
+        font-size: 15px;
+        margin-top: 50px;
+        flex-wrap: wrap;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+       text-align: center;
+    } 
+
+    h1 {
+        font-size: 16px;
+    }
+
+    .tarjeta1 {
+        padding: 10px;
+        min-height: 220px;
+    }
+
+    #id {
+        font-size: 20px;
+    }
+
+    .caracteristicas {
+        font-size: 8px;
+        gap: 8px;
+    }
+    body {
+        background-size: cover;
+       background-color: rgba(255, 255, 255, 0.507);
+    }
+}
+
+@media (max-width: 368px) {
+    .card {
+        width: 280px;
+        height: 425px;
+    }
+
+    #pok {
+        width: 80px;
+        height: 80px;
+    }
+
+    
+    #titulo1 {
+        font-size: 15px;
+        margin-top: 50px;
+        flex-wrap: wrap;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+       text-align: center;
+    } 
+
+    h1 {
+        font-size: 16px;
+    }
+
+    .tarjeta1 {
+        padding: 10px;
+        min-height: 220px;
+    }
+
+    #id {
+        font-size: 20px;
+    }
+
+    .caracteristicas {
+        font-size: 8px;
+        gap: 8px;
+    }
+}
