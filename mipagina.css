@@ -132,11 +132,6 @@ font-size: 50px;
 }
 
 @media (max-width: 700px) {
-    .divpadre {
-        flex-direction: column;
-        align-items: center;
-        gap: 30px;
-    }
     .div1, .div2, .div3, .div4, .div5 {
         width: 80%;
         max-width: 350px;
