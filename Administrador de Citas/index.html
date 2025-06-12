@@ -21,9 +21,10 @@
                         <option value="Terminada">Terminada</option>
                         <option value="Anulada">Anulada</option>
                     </select>
-                    <button id="btnNuevaCita" type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    <button id="btnNuevaCita" type="button" class="btn btn-lila" data-bs-toggle="modal"
                         data-bs-target="#modalCita">
                         Nueva Cita
+                    </button>
                 </div>
                 <hr class="hr">
                 <div id="citasGuardadas">
@@ -40,8 +41,8 @@
     <!--Nueva Cita -->
     <div class="modal fade" id="modalCita" tabindex="-1">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-primary text-white">
+            <div class="modal-content modal-lila">
+                <div class="modal-header text-white" style="background-color: #a855f7;">
                     <h5 class="modal-title">Registrar Cita</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
@@ -102,7 +103,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         Cancelar
                     </button>
-                    <button type="button" id="btnGuardar" class="btn btn-primary">
+                    <button type="button" id="btnGuardar" class="btn btn-lila">
                         Guardar
                     </button>
                 </div>
