@@ -10,33 +10,105 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-start flex-wrap gap-3 mt-4">
-            <div class="flex-grow-1" style="min-width: 250px;">
-                <h1>Administrador de Citas</h1>
+    <div class="d-flex justify-content-between align-items-start flex-wrap gap-3 mt-0">
+        <div class="flex-grow-1" style="min-width: 250px;">
+            <h1>🐶Administrador de Citas🐱</h1>
+            <div class="contenido-principal">
                 <div class="filtro-container mb-3">
-                    <select id="filtroEstado" class="form-select w-auto" onchange="mostrarCitas()">
+                    <button id="btnNuevaCita" type="button" class="btn btn-lila orden-nueva-cita" data-bs-toggle="modal"
+                        data-bs-target="#modalCita">
+                        Nueva Cita
+                    </button>
+
+                    <select id="filtroEstado" class="form-select w-auto orden-filtro" onchange="mostrarCitas()">
                         <option value="">Todas las citas</option>
                         <option value="Abierta">Abierta</option>
                         <option value="Terminada">Terminada</option>
                         <option value="Anulada">Anulada</option>
                     </select>
-                    <button id="btnNuevaCita" type="button" class="btn btn-lila" data-bs-toggle="modal"
-                        data-bs-target="#modalCita">
-                        Nueva Cita
-                    </button>
                 </div>
+
                 <hr class="hr">
                 <div id="citasGuardadas">
                     <h3>Citas Programadas</h3>
                     <input type="text" id="busqueda" class="form-control mb-3"
                         placeholder="Buscar por mascota o propietario" oninput="filtrarCitas()">
                     <div id="listaCitasPorFecha"></div>
+                    <div id="sinCitas" class="text-center text-muted mt-3" style="display: none;">
+                        <p>😿 No hay citas registradas.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Modal Nueva Cita -->
+    <div class="modal fade" id="modalCita" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content modal-lila">
+                <div class="modal-header text-white" style="background-color: #a855f7;">
+                    <h5 class="modal-title">Registrar Cita</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Número de Cita</label>
+                        <input type="text" id="numeroCita" class="form-control" readonly />
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" id="nombreMascota" class="form-control" placeholder="Nombre de Mascota"
+                            required />
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" id="nombreDueño" class="form-control" placeholder="Nombre del Dueño"
+                            required />
+                    </div>
+                    <div class="mb-3">
+                        <input type="number" id="telefono" maxlength="10" class="form-control" placeholder="Teléfono"
+                            required />
+                    </div>
+                    <div class="mb-3">
+                        <input type="date" id="fecha" class="form-control" min="" placeholder="Fecha" required />
+                    </div>
+                    <div class="mb-3">
+                        <input type="time" id="hora" class="form-control" placeholder="Hora" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Tipo de Mascota</label>
+                        <select id="tipoMascota" class="form-select" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="Perro">Perro</option>
+                            <option value="Gato">Gato</option>
+                            <option value="Pez">Pez</option>
+                            <option value="Pájaro">Pájaro</option>
+                            <option value="Hamster">Hamster</option>
+                            <option value="Conejo">Conejo</option>
+                            <option value="Tortuga">Tortuga</option>
+                            <option value="Erizo">Erizo</option>
+                            <option value="Caballo">Caballo</option>
+                            <option value="Pato">Pato</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Síntomas</label>
+                        <textarea id="sintomas" class="form-control" maxlength="400" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Estado</label>
+                        <select id="estado" class="form-select">
+                            <option value="Abierta">Abierta</option>
+                            <option value="Terminada">Terminada</option>
+                            <option value="Anulada">Anulada</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" id="btnGuardar" class="btn btn-lila">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!--Nueva Cita -->
     <div class="modal fade" id="modalCita" tabindex="-1">
@@ -285,56 +357,55 @@
         // filtrar citas
         function filtrarCitas() {
             const filtroEstado = document.getElementById("filtroEstado").value;
-            const terminoBusqueda = document
-                .getElementById("busqueda")
-                .value.toLowerCase();
+            const terminoBusqueda = document.getElementById("busqueda").value.toLowerCase();
             const contenedor = document.getElementById("listaCitasPorFecha");
             contenedor.innerHTML = "";
 
             const citasFiltradas = citas.filter((cita) => {
-                const coincideEstado = filtroEstado
-                    ? cita.estado === filtroEstado
-                    : true;
+                const coincideEstado = filtroEstado ? cita.estado === filtroEstado : true;
                 const coincideBusqueda =
                     cita.nombreMascota.toLowerCase().includes(terminoBusqueda) ||
                     cita.nombreDueño.toLowerCase().includes(terminoBusqueda);
                 return coincideEstado && coincideBusqueda;
             });
 
+            // Mostrar u ocultar el mensaje de "no hay citas"
+            if (citasFiltradas.length === 0) {
+                document.getElementById("sinCitas").style.display = "block";
+            } else {
+                document.getElementById("sinCitas").style.display = "none";
+            }
+
             citasFiltradas.forEach((cita) => {
                 const citaCard = document.createElement("div");
                 citaCard.className = "cita-card";
                 citaCard.innerHTML = `
-        <div class="cita-header">
-            <img src="${cita.gifUrl}" class="gif-animal" alt="${cita.tipoMascota
-                    }">
-            <h5>${cita.nombreMascota} (${cita.tipoMascota
-                    })</h5>
-        </div>
-        <div class="cita-info"><strong>Propietario:</strong> ${cita.nombreDueño
-                    }</div>
-        <div class="cita-info"><strong>Telefono:</strong> ${cita.telefono
-                    }</div>
-        <div class="cita-info"><strong>Fecha:</strong> ${formatearFecha(
-                        cita.fecha
-                    )}</div>
-        <div class="cita-info"><strong>Hora:</strong> ${cita.hora}</div>
-        <div class="cita-info"><strong>Síntomas:</strong> ${cita.sintomas
-                    }</div>
-        <div class="cita-info">
-            <strong>Estado:</strong>
-            <select class="form-select form-select-sm mt-1" onchange="cambiarEstado(${cita.numeroCita
-                    }, this.value)">
-                <option value="Abierta" ${cita.estado === "Abierta" ? "selected" : ""}>Abierta</option>
-                <option value="Terminada" ${cita.estado === "Terminada" ? "selected" : ""}>Terminada</option>
-                <option value="Anulada" ${cita.estado === "Anulada" ? "selected" : ""}>Anulada</option>
-            </select>
-        </div>
-        <div class="cita-actions">
-            <button class="btn btn-sm btn-editar me-2" onclick="editarCita(${cita.numeroCita})">✍️</button>
-            <button class="btn btn-sm btn-eliminar" onclick="eliminarCita(${cita.numeroCita})">❌</button>
-        </div>
-        `;
+    <div class="cita-header">
+        <img src="${cita.gifUrl}" class="gif-animal" alt="${cita.tipoMascota}">
+        <h5>${cita.nombreMascota} (${cita.tipoMascota})</h5>
+    </div>
+    <div class="cita-info"><strong>Propietario:</strong> ${cita.nombreDueño}</div>
+    <div class="cita-info"><strong>Telefono:</strong> ${cita.telefono}</div>
+    <div class="cita-info"><strong>Fecha:</strong> ${formatearFecha(cita.fecha)}</div>
+    <div class="cita-info"><strong>Hora:</strong> ${cita.hora}</div>
+    <div class="cita-info"><strong>Síntomas:</strong> ${cita.sintomas}</div>
+    <div class="cita-info">
+        <strong>Estado:</strong>
+        <select class="form-select form-select-sm mt-1" onchange="cambiarEstado(${cita.numeroCita}, this.value)">
+            <option value="Abierta" ${cita.estado === "Abierta" ? "selected" : ""}>Abierta</option>
+            <option value="Terminada" ${cita.estado === "Terminada" ? "selected" : ""}>Terminada</option>
+            <option value="Anulada" ${cita.estado === "Anulada" ? "selected" : ""}>Anulada</option>
+        </select>
+    </div>
+     <div class="cita-actions mt-3">
+        <button class="btn btn-outline-lila btn-sm me-2" onclick="editarCita(${cita.numeroCita})">
+            ✏️ Editar
+        </button>
+        <button class="btn btn-outline-danger btn-sm" onclick="eliminarCita(${cita.numeroCita})">
+            🗑️ Eliminar
+        </button>
+    </div>
+`;
                 contenedor.appendChild(citaCard);
             });
         }
@@ -346,6 +417,13 @@
             cita.estado = nuevoEstado;
             localStorage.setItem("citas", JSON.stringify(citas));
             filtrarCitas();
+
+            if (citasFiltradas.length === 0) {
+                document.getElementById("sinCitas").style.display = "block";
+            } else {
+                document.getElementById("sinCitas").style.display = "none";
+            }
+
         }
 
         // editar cita
